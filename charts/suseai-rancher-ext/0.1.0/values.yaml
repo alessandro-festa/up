@@ -7,4 +7,5 @@ plugin:
   noAuth: false
   metadata:
     catalog.cattle.io/rancher-version: ">= 2.10.0"
+    catalog.cattle.io/display-name: "SUSE AI Universal Proxy UI Extension"
     catalog.cattle.io/ui-extensions-version: "0.1.0"

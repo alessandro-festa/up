@@ -4,17 +4,19 @@ entries:
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/display-name: 'SUSE AI Universal Proxy UI Extension'
       catalog.cattle.io/os: linux
-      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/permits-os: linux
       catalog.cattle.io/rancher-version: '>= 2.10.0'
       catalog.cattle.io/scope: management
-      catalog.cattle.io/ui-component: plugins
-      catalog.cattle.io/ui-extensions-version: '0.1.0'
+      catalog.cattle.io/ui-component: extension
+      catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
     apiVersion: v2
     appVersion: 0.1.0
     created: "2025-11-11T08:58:49.399146-05:00"
     description: "SUSE AI Universal Proxy UI Extension"
     digest: 5eba74e3f5a0f84f791106b009fbbf6ed67e3bfd36958192e835e2ebb725a399
+    icon: https://raw.githubusercontent.com/alessandro-festa/up/refs/heads/main/icons/suse-ai-up-ext/0.1.0/0.1.0-icon.svg
     name: "SUSE AI Universal Proxy UI Extension"
     type: application
     urls:

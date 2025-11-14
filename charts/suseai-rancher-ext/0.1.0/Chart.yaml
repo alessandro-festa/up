@@ -10,7 +10,7 @@ annotations:
 apiVersion: v2
 appVersion: 0.1.0
 description: "SUSE AI Universal Proxy UI Extension"
-name: "SUSE AI Universal Proxy Extension"
+name: suseai-rancher-ext
 type: application
 version: 0.1.0
-icon: https://raw.githubusercontent.com/alessandro-festa/up/refs/heads/main/icons/suse-ai-up-ext/0.1.0/icon.svg
+icon: https://raw.githubusercontent.com/alessandro-festa/up/refs/heads/main/icons/suse-ai-up-ext/0.1.0/0.1.0-icon.svg
