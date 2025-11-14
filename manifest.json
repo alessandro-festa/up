@@ -1,0 +1,24 @@
+{
+  "extensions": {
+    "universal-proxy": {
+      "repo": "suse/universal-proxy",
+      "branch": "main",
+      "versions": ["1.0.0"]
+    },
+    "virtualmcp": {
+      "repo": "suse/virtualmcp",
+      "branch": "main",
+      "versions": ["1.0.0"]
+    },
+    "smartagents": {
+      "repo": "suse/smartagents",
+      "branch": "main",
+      "versions": ["1.0.0"]
+    },
+    "universal-proxy-ui": {
+      "repo": "suse/universal-proxy-ui",
+      "branch": "main",
+      "versions": ["1.0.0"]
+    }
+  }
+}
