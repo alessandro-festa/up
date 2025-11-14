@@ -1,22 +1,22 @@
 {
   "extensions": {
     "universal-proxy": {
-      "repo": "alessandro-festa/universal-proxy",
+      "repo": "suse-ai-research/universal-proxy",
       "branch": "main",
       "versions": ["1.0.0"]
     },
     "virtualmcp": {
-      "repo": "suse/virtualmcp",
+      "repo": "suse-ai-research/virtualmcp",
       "branch": "main",
       "versions": ["1.0.0"]
     },
     "smartagents": {
-      "repo": "suse/smartagents",
+      "repo": "suse-ai-research/smartagents",
       "branch": "main",
       "versions": ["1.0.0"]
     },
     "universal-proxy-ui": {
-      "repo": "suse/universal-proxy-ui",
+      "repo": "suse-ai-research/universal-proxy-ui",
       "branch": "main",
       "versions": ["1.0.0"]
     }
