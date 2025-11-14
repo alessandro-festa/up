@@ -1,6 +1,6 @@
 {
-  "name": "suseai-rancher-ext",
-  "description": "suseai-rancher-ext plugin",
+  "name": "universal-proxy",
+  "description": "universal-proxy plugin",
   "version": "0.1.0",
   "private": false,
   "rancher": true,
@@ -20,5 +20,5 @@
   "files": [
     "**/*"
   ],
-  "main": "suseai-rancher-ext-0.1.0.umd.min.js"
+  "main": "universal-proxy-0.1.0.umd.min.js"
 }
