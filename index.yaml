@@ -9,7 +9,7 @@ entries:
       catalog.cattle.io/rancher-version: '>= 2.10.0'
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
-      catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
+      catalog.cattle.io/ui-extensions-version: '0.1.0'
     apiVersion: v2
     appVersion: 0.1.0
     created: "2025-11-11T08:58:49.399146-05:00"
