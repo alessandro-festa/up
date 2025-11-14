@@ -18,6 +18,6 @@ entries:
     name: suse-ai-universal-proxy
     type: application
     urls:
-    - assets/universal-proxy/suseai-rancher-ext-0.1.0.tgz
+    - assets/universal-proxy/universal-proxy-0.1.0.tgz
     version: 0.1.0
 generated: "2025-11-11T08:58:49.398764-05:00"
