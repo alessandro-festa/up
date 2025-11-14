@@ -10,6 +10,7 @@ annotations:
 apiVersion: v2
 appVersion: 0.1.0
 description: suseai-rancher-ext plugin
+icon: https://raw.githubusercontent.com/alessandro-festa/heads/main/icons/suse-ai-up-ext/0.1.0/icon.svg
 name: suseai-rancher-ext
 type: application
 version: 0.1.0

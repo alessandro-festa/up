@@ -1,6 +1,7 @@
 {
   "name": "suseai-rancher-ext",
   "description": "suseai-rancher-ext plugin",
+  "icon":"https://raw.githubusercontent.com/alessandro-festa/up/main/icons/suse-ai-up-ext/0.1.0/icon.svg",
   "version": "0.1.0",
   "private": false,
   "rancher": true,

@@ -18,6 +18,7 @@ entries:
     name: suseai-rancher-ext
     type: application
     urls:
-    - assets/suseai-rancher-ext/suseai-rancher-ext-0.1.0.tgz
+    - assets/suseai-rancher-ext-0.1.0.tgz
+    icon: https://raw.githubusercontent.com/alessandro-festa/main/icons/suse-ai-up-ext/0.1.0/icon.svg
     version: 0.1.0
 generated: "2025-11-11T08:58:49.398764-05:00"
