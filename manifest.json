@@ -3,7 +3,7 @@
     "universal-proxy": {
       "repo": "suse-ai-research/universal-proxy",
       "branch": "main",
-      "versions": ["1.0.0"]
+      "versions": ["0.1.0"]
     },
     "virtualmcp": {
       "repo": "suse-ai-research/virtualmcp",
