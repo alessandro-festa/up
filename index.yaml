@@ -17,7 +17,7 @@ entries:
     description: "SUSE AI Universal Proxy UI Extension"
     digest: 5eba74e3f5a0f84f791106b009fbbf6ed67e3bfd36958192e835e2ebb725a399
     icon: https://raw.githubusercontent.com/alessandro-festa/up/refs/heads/main/icons/suse-ai-up-ext/0.1.0/0.1.0-icon.svg
-    name: "SUSE AI Universal Proxy UI Extension"
+    name: suseai-rancher-ext
     type: application
     urls:
     - assets/suseai-rancher-ext/suseai-rancher-ext-0.1.0.tgz
