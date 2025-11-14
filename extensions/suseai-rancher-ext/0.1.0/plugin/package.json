@@ -1,9 +1,7 @@
 {
   "name": "suseai-rancher-ext",
-  "description": "SUSE AI Universal Proxy UI Extension",
+  "description": "suseai-rancher-ext plugin",
   "version": "0.1.0",
-  "icon": "https://raw.githubusercontent.com/alessandro-festa/up/main/icons/suse-ai-up-ext/0.1.0/0.1.0-icon.svg",
-  "author": "SUSE AI Research",
   "private": false,
   "rancher": true,
   "engines": {

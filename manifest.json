@@ -1,9 +1,0 @@
-{
-  "extensions": {
-    "suseai-rancher-ext": {
-      "repo": "alessandro-festa/suse-ai-up",
-      "branch": "main",
-      "versions": ["0.1.0"]
-    }
-  }
-}
