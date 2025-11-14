@@ -1,11 +1,11 @@
 apiVersion: v1
 entries:
-  suseai-rancher-ext:
+  universal-proxy:
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
-      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/permits-os: linux
       catalog.cattle.io/rancher-version: '>= 2.10.0'
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
@@ -13,11 +13,11 @@ entries:
     apiVersion: v2
     appVersion: 0.1.0
     created: "2025-11-11T08:58:49.399146-05:00"
-    description: suseai-rancher-ext plugin
+    description: universal-proxy plugin
     digest: 5eba74e3f5a0f84f791106b009fbbf6ed67e3bfd36958192e835e2ebb725a399
-    name: suseai-rancher-ext
+    name: "SUSE AI Universal Proxy"
     type: application
     urls:
-    - assets/suseai-rancher-ext/suseai-rancher-ext-0.1.0.tgz
+    - assets/universal-proxy/universal-proxy-0.1.0.tgz
     version: 0.1.0
 generated: "2025-11-11T08:58:49.398764-05:00"

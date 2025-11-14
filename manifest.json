@@ -1,7 +1,7 @@
 {
   "extensions": {
     "universal-proxy": {
-      "repo": "suse/universal-proxy",
+      "repo": "alessandro-festa/universal-proxy",
       "branch": "main",
       "versions": ["1.0.0"]
     },
