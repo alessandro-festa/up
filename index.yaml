@@ -16,7 +16,7 @@ entries:
     created: "2025-11-11T08:58:49.399146-05:00"
     description: "SUSE AI Universal Proxy UI Extension"
     digest: 5eba74e3f5a0f84f791106b009fbbf6ed67e3bfd36958192e835e2ebb725a399
-    icon: https://raw.githubusercontent.com/alessandro-festa/up/refs/heads/main/icons/suse-ai-up-ext/0.1.0/0.1.0-icon.svg
+    icon: https://raw.githubusercontent.com/alessandro-festa/up/main/icons/suse-ai-up-ext/0.1.0/0.1.0-icon.svg
     name: suseai-rancher-ext
     type: application
     urls:
