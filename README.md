@@ -1,154 +1,291 @@
 # SUSE AI Universal Proxy
 
-A comprehensive platform for managing and proxying Model Context Protocol (MCP) servers, providing scalable AI service orchestration across multiple microservices.
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square)
+![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
-## ✨ Key Features
+A comprehensive, modular MCP (Model Context Protocol) proxy system that enables secure, scalable, and extensible AI model integrations.
 
-- **Scalable Routing**: Session-aware load balancing and routing to MCP server instances
-- **Lifecycle Management**: Automated deployment, scaling, and teardown of AI services
-- **Registry Management**: Comprehensive MCP server registry with discovery, upload, and search capabilities
-- **Enterprise Integration**: Built-in authentication, observability, and security features
-- **Multi-Provider Support**: Seamless integration with various AI providers and local models
-- **Kubernetes-Native**: Designed for cloud-native deployments with Helm charts and StatefulSets
-- **Plugin Architecture**: Extensible microservices framework for pluggable AI capabilities
+## TL;DR
 
-## 🎯 What This Solves
-
-The SUSE AI Universal Proxy addresses the growing complexity of deploying and managing AI services in enterprise environments. By providing a unified reverse proxy and management layer for MCP servers, it enables:
-
-- **Unified API Gateway**: Single entry point for all AI services
-- **Service Orchestration**: Automated service discovery and registration
-- **Load Balancing**: Intelligent routing with session affinity
-- **Security**: Enterprise-grade authentication and authorization
-- **Observability**: Comprehensive monitoring and logging
-- **Scalability**: Kubernetes-native deployment with auto-scaling
-
-This solution bridges the gap between AI development and production deployment, making it easier to build and maintain AI-powered applications.
-
-## 🏗️ Architecture Overview
-
-```mermaid
-graph TD
-    A[SUSE AI Universal Proxy]
-    subgraph B [Plugin Service Framework]
-        C[SmartAgents Service]
-        D[Registry Service]
-        E[VirtualMCP Service]
-    end
-    F[Dynamic Router & Load Balancer]
-    G[Service Discovery & Health Monitor]
-    subgraph H [External Clients]
-        I[VS Code MCP Clients]
-        J[Web Apps REST APIs]
-        K[CLI Tools curl/wget]
-    end
-
-    H --> A
-    A --> B
-    B --> F
-    A --> G
-
-    classDef proxyClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef serviceClass fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
-    classDef clientClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-
-    class A proxyClass
-    class C,D,E serviceClass
-    class I,J,K clientClass
-```
-
-## 🏗️ User Flow Architecture
-
-```mermaid
-graph LR
-    A[User Device<br/>VS Code, Web App, CLI Tool] --> B[Proxy Service<br/>Router & Load Balancer<br/>• Service Discovery<br/>• Health Monitoring<br/>• Load Balancing<br/>• Session Affinity]
-    B --> C[SmartAgents Service<br/>AI Orchestrator<br/>• Local Model acts on behalf<br/>of Remote LLM for security]
-    B --> D[MCP Registry Service<br/>Server Management<br/>• Discovery<br/>• Upload<br/>• Search<br/>• Bulk Operations]
-    D --> E[Network Scan<br/>Auto-Discovery<br/>• CIDR Scanning<br/>• Port Scanning<br/>• Health Checks<br/>• Auto-Registration]
-    D --> F[VirtualMCP Service<br/>Legacy Integration<br/>• OpenAPI Schema<br/>• Database Integration<br/>• Code-free Generation<br/>• Legacy API Consumption]
-    C --> G[Local Model<br/>Worker<br/>• Private Data Control]
-    G --> H[Remote LLM<br/>Supervisor<br/>• Cloud AI Power]
-    F --> I[MCP Servers<br/>Generated from APIs<br/>• Standardized Endpoints]
-
-    classDef userClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef proxyClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef serviceClass fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
-    classDef aiClass fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef outputClass fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-
-    class A userClass
-    class B proxyClass
-    class C,D,E,F serviceClass
-    class G,H aiClass
-    class I outputClass
-```
-
-## 📦 Services
-
-### 🔀 Proxy Service
-The core reverse proxy and management layer for MCP servers. Handles routing, discovery, and lifecycle operations.
-
-- **[Overview](docs/overview.md)** - Architecture and key concepts
-- **[Getting Started](docs/getting-started.md)** - Installation and setup
-- **[API Reference](docs/api-reference.md)** - Complete API documentation
-- **[Examples](docs/examples.md)** - Usage examples and tutorials
-- **[Security](docs/security.md)** - Security features and best practices
-- **[OAuth Implementation](docs/oauth-implementation.md)** - OAuth 2.1 compliant token management
-
-### 🤖 Smart Agents Service
-AI orchestrator to enable a local model to act on behalf of a remote LLM to provide more security while maintaining full control over the data.
-
-*Note: SmartAgents has been moved to a separate repository for independent development.*
-
-### 🔧 Virtual MCP Service
-Virtual MCP allow the creation of an MCP Server starting from openapi schemas and databases without having to write code. Virtual MCP standardize the way endpoints are presented and allow legacy applications to be consumed by the LLM.
-
-*Note: VirtualMCP has been moved to a separate repository for independent development.*
-
-### 📚 MCP Registry
-Comprehensive MCP server registry with discovery, deployment, and management capabilities.
-
-- **[Registry Documentation](docs/registry.md)** - Complete registry guide
-
-## 📚 Documentation
-
-- **[Documentation Index](docs/index.html)** - Navigate complete documentation
-- **[OAuth Implementation](docs/oauth-implementation.md)** - OAuth 2.1 compliant token management system
-- **[Adapters Guide](docs/adapters.md)** - Adapter configuration and management
-- **[Discovery Service](docs/discovery.md)** - Network discovery and auto-registration
-- **[Registry Management](docs/registry.md)** - MCP server registry operations
-- **[Contributing](CONTRIBUTING.md)** - Development guidelines and contribution process
-- **[License](LICENSE.md)** - Apache 2.0 license information
-
-### Local Development Setup
 ```bash
-# 1. Start the proxy service
-cd suse-ai-up-proxy && go run cmd/service/main.go
-
-# 2. Start SmartAgents with proxy registration (now in separate repository)
-
-# 3. Test the setup
-curl http://localhost:8911/api/v1/plugins/services
-curl http://localhost:8911/api/v1/models
+helm repo add suse https://charts.suse.com
+helm repo update
+helm install suse-ai-up suse/suse-ai-up
 ```
 
-## 🤝 Contributing
+## Prerequisites
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+- Kubernetes 1.19+
+- Helm 3.0+
 
-- How to get started with development
-- Testing guidelines
-- Submitting pull requests
-- Coding conventions
+## Installing the Chart
 
-For questions or discussions, join our [GitHub Discussions](https://github.com/suse/suse-ai-up/discussions).
+To install the chart with the release name `suse-ai-up`:
 
-## 📄 License
+```bash
+helm install suse-ai-up suse/suse-ai-up
+```
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE.md) file for details.
+## Uninstalling the Chart
 
----
+To uninstall/delete the `suse-ai-up` deployment:
 
-**Ideator and Author**: [@alessandro-festa](https://github.com/alessandro-festa)
+```bash
+helm uninstall suse-ai-up
+```
 
-Built with ❤️ by SUSE AI Team
+## Configuration
+
+The following table lists the configurable parameters of the SUSE AI Universal Proxy chart and their default values.
+
+### Global Parameters
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| global.imageRegistry | string | `""` | Global Docker image registry |
+| global.imagePullSecrets | list | `[]` | Global Docker registry secret names |
+| global.storageClass | string | `""` | Global storage class for persistent volumes |
+
+### Common Parameters
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| image.registry | string | `"suse"` | SUSE AI Universal Proxy image registry |
+| image.repository | string | `"suse-ai-up"` | SUSE AI Universal Proxy image repository |
+| image.tag | string | `""` | SUSE AI Universal Proxy image tag (defaults to appVersion) |
+| image.pullPolicy | string | `"IfNotPresent"` | SUSE AI Universal Proxy image pull policy |
+| image.architecture | list | `["amd64", "arm64"]` | Supported architectures |
+
+### Service Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| services.proxy.enabled | bool | `true` | Enable MCP proxy service |
+| services.proxy.port | int | `8080` | HTTP port for proxy service |
+| services.proxy.tlsPort | int | `38080` | HTTPS port for proxy service |
+| services.registry.enabled | bool | `true` | Enable MCP registry service |
+| services.registry.port | int | `8913` | HTTP port for registry service |
+| services.registry.tlsPort | int | `38913` | HTTPS port for registry service |
+| services.discovery.enabled | bool | `true` | Enable network discovery service |
+| services.discovery.port | int | `8912` | HTTP port for discovery service |
+| services.discovery.tlsPort | int | `38912` | HTTPS port for discovery service |
+| services.plugins.enabled | bool | `true` | Enable plugin management service |
+| services.plugins.port | int | `8914` | HTTP port for plugins service |
+| services.plugins.tlsPort | int | `38914` | HTTPS port for plugins service |
+
+### TLS Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| tls.enabled | bool | `true` | Enable TLS encryption |
+| tls.autoGenerate | bool | `true` | Auto-generate self-signed certificates |
+| tls.certFile | string | `""` | Path to custom TLS certificate |
+| tls.keyFile | string | `""` | Path to custom TLS private key |
+| tls.secretName | string | `""` | Name of existing TLS secret |
+
+### Authentication Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| auth.method | string | `"oauth"` | Authentication method (oauth, bearer, apikey, basic, none) |
+| auth.oauth.enabled | bool | `false` | Enable OAuth 2.0 authentication |
+| auth.oauth.clientId | string | `""` | OAuth client ID |
+| auth.oauth.clientSecret | string | `""` | OAuth client secret |
+| auth.apikey.enabled | bool | `false` | Enable API key authentication |
+| auth.apikey.header | string | `"X-API-Key"` | API key header name |
+| auth.bearer.enabled | bool | `false` | Enable Bearer token authentication |
+
+### Monitoring Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| monitoring.enabled | bool | `false` | Enable monitoring stack |
+| monitoring.prometheus.enabled | bool | `false` | Deploy Prometheus |
+| monitoring.prometheus.existingService | string | `""` | Use existing Prometheus service |
+| monitoring.grafana.enabled | bool | `false` | Deploy Grafana |
+| monitoring.grafana.existingService | string | `""` | Use existing Grafana service |
+
+### Resource Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| services.proxy.resources.requests.cpu | string | `"100m"` | Proxy CPU request |
+| services.proxy.resources.requests.memory | string | `"128Mi"` | Proxy memory request |
+| services.proxy.resources.limits.cpu | string | `"500m"` | Proxy CPU limit |
+| services.proxy.resources.limits.memory | string | `"512Mi"` | Proxy memory limit |
+
+*(Similar resource configurations exist for registry, discovery, and plugins services)*
+
+### Ingress Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| ingress.enabled | bool | `false` | Enable ingress |
+| ingress.className | string | `""` | Ingress class name |
+| ingress.hosts | list | `[]` | List of ingress hosts |
+
+### Service Account Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| serviceAccount.create | bool | `true` | Create service account |
+| serviceAccount.annotations | object | `{}` | Service account annotations |
+| serviceAccount.name | string | `""` | Service account name |
+
+## Examples
+
+### Basic Installation
+
+```bash
+helm install suse-ai-up suse/suse-ai-up \
+  --set services.proxy.enabled=true \
+  --set services.registry.enabled=true \
+  --set tls.enabled=true
+```
+
+### Custom TLS Certificates
+
+```bash
+helm install suse-ai-up suse/suse-ai-up \
+  --set tls.certFile=/path/to/cert.pem \
+  --set tls.keyFile=/path/to/key.pem \
+  --set tls.secretName=my-tls-secret
+```
+
+### With Monitoring
+
+```bash
+helm install suse-ai-up suse/suse-ai-up \
+  --set monitoring.enabled=true \
+  --set monitoring.prometheus.enabled=true \
+  --set monitoring.grafana.enabled=true
+```
+
+### High Availability Setup
+
+```yaml
+replicaCount: 3
+services:
+  proxy:
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+  registry:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+```
+
+## Service Ports
+
+After installation, the services will be available on the following ports:
+
+| Service | HTTP Port | HTTPS Port | Description |
+|---------|-----------|------------|-------------|
+| Proxy | 8080 | 38080 | MCP protocol proxy |
+| Registry | 8913 | 38913 | Server catalog management |
+| Discovery | 8912 | 38912 | Network scanning service |
+| Plugins | 8914 | 38914 | Plugin management |
+| Health/Docs | 8911 | 3911 | Health checks and API docs |
+
+## Accessing Services
+
+### API Documentation
+```bash
+# Open Swagger UI
+open http://your-cluster-ip:8911/docs
+```
+
+### Health Checks
+```bash
+# Check all services
+curl http://your-cluster-ip:8911/health
+
+# Individual service checks
+curl http://your-cluster-ip:8080/health  # Proxy
+curl http://your-cluster-ip:8913/health  # Registry
+curl http://your-cluster-ip:8912/health  # Discovery
+curl http://your-cluster-ip:8914/health  # Plugins
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Pods not starting:**
+```bash
+kubectl get pods -l app.kubernetes.io/name=suse-ai-up
+kubectl describe pod <pod-name>
+kubectl logs <pod-name>
+```
+
+**Service unavailable:**
+```bash
+kubectl get services -l app.kubernetes.io/name=suse-ai-up
+kubectl describe service <service-name>
+```
+
+**TLS certificate issues:**
+```bash
+# Check certificate validity
+kubectl get secrets -l app.kubernetes.io/name=suse-ai-up
+kubectl describe secret <tls-secret-name>
+```
+
+### Logs and Debugging
+
+```bash
+# View all pod logs
+kubectl logs -l app.kubernetes.io/name=suse-ai-up --all-containers
+
+# View specific service logs
+kubectl logs -l app.kubernetes.io/name=suse-ai-up -c proxy
+
+# Debug with temporary pod
+kubectl run debug --image=busybox --rm -it -- sh
+```
+
+## Upgrading
+
+To upgrade the chart:
+
+```bash
+helm upgrade suse-ai-up suse/suse-ai-up
+```
+
+To upgrade with new values:
+
+```bash
+helm upgrade suse-ai-up suse/suse-ai-up -f new-values.yaml
+```
+
+## Backup and Restore
+
+*(Currently not implemented - handled externally)*
+
+## Security Considerations
+
+- TLS encryption enabled by default
+- Self-signed certificates for development
+- Configurable authentication methods
+- Pod security contexts applied
+- Network policies can be added
+
+## Support
+
+- **Documentation**: [SUSE AI Universal Proxy Docs](https://github.com/suse/suse-ai-up/tree/main/docs)
+- **Issues**: [GitHub Issues](https://github.com/suse/suse-ai-up/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/suse/suse-ai-up/discussions)
+
+## License
+
+Licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/suse/suse-ai-up/blob/main/LICENSE) for details.
