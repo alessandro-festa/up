@@ -25,7 +25,7 @@ global:
 
 # Image configuration
 image:
-  registry: suse
+  registry: ghcr.io/alessandro-festa
   repository: suse-ai-up
   tag: "latest"
   pullPolicy: IfNotPresent
