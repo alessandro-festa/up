@@ -83,9 +83,9 @@ spec:
             {{- if .Values.tls.keyFile }}
             - name: TLS_KEY_FILE
               value: {{ .Values.tls.keyFile | quote }}
-            {{- end }}
-            {{- end }}
-            {{- with .Values.extraEnvVars }}
+             {{- end }}
+             {{- end }}
+             {{- with .Values.extraEnvVars }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
           resources:
