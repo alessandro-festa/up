@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: suse-ai-up-mcp
+  labels:
+    name: suse-ai-up-mcp
+    app.kubernetes.io/name: suse-ai-up
