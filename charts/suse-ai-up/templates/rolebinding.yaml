@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ include "suse-ai-up.fullname" . }}-sidecar-binding
-  namespace: suse-ai-up-mcp
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "suse-ai-up.labels" . | nindent 4 }}
 subjects:
