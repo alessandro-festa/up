@@ -13,7 +13,7 @@ replicaCount: 1
 # Image configuration
 image:
   registry: ghcr.io
-  repository: alessandro-festa/suse-ai-up
+  repository: alessandro-festa/uniproxy
   tag: "latest"
   pullPolicy: IfNotPresent
 
@@ -38,9 +38,9 @@ global:
   tolerations: []
   affinity: {}
 
-# Service enablement and configuration
+# Service configuration
 services:
-  # Primary proxy service (always enabled)
+  # Unified proxy service (includes registry, discovery, and plugin functionality)
   proxy:
     enabled: true
     port: 8911
@@ -52,50 +52,6 @@ services:
       limits:
         cpu: 500m
         memory: 512Mi
-
-  # Registry service (starts after proxy)
-  registry:
-    enabled: true
-    port: 8913
-    tlsPort: 38913
-    remoteServersFile: "config/remote_mcp_servers.json"  # Optional: static remote servers file (uses in-memory storage if not found)
-    resources:
-      requests:
-        cpu: 50m
-        memory: 64Mi
-      limits:
-        cpu: 200m
-        memory: 256Mi
-
-  # Discovery service (starts after registry)
-  discovery:
-    enabled: true
-    port: 8912
-    tlsPort: 38912
-    defaultTimeout: 30s
-    maxConcurrency: 10
-    excludeProxy: true  # Don't scan proxy ports
-    resources:
-      requests:
-        cpu: 50m
-        memory: 64Mi
-      limits:
-        cpu: 200m
-        memory: 256Mi
-
-  # Plugins service (starts last)
-  plugins:
-    enabled: true
-    port: 8914
-    tlsPort: 38914
-    healthInterval: 30s
-    resources:
-      requests:
-        cpu: 50m
-        memory: 64Mi
-      limits:
-        cpu: 200m
-        memory: 256Mi
 
 # TLS Configuration
 tls:
@@ -184,20 +140,11 @@ service:
   type: ClusterIP
   annotations: {}
 
-  # Individual service ports
+  # Service ports
   ports:
     proxy:
       http: 8911
       https: 3911
-    registry:
-      http: 8913
-      https: 38913
-    discovery:
-      http: 8912
-      https: 38912
-    plugins:
-      http: 8914
-      https: 38914
     health:
       http: 8911
       https: 3911
@@ -330,9 +277,85 @@ deploymentAnnotations: {}
 # Service annotations
 serviceAnnotations: {}
 
+# MCP Registry Configuration
+registry:
+  # Enable loading servers from YAML file
+  enabled: true
+
+  # MCP servers configuration (will be loaded into ConfigMap)
+  servers: |
+    - name: uyuni
+      image: ghcr.io/uyuni-project/mcp-server-uyuni:latest
+      type: server
+      meta:
+        category: system-management
+        sidecarConfig:
+          commandType: docker
+          command: "docker run -it --rm -e UYUNI_SERVER=http://dummy.domain.com -e UYUNI_USER=admin -e UYUNI_PASS=admin -e UYUNI_MCP_TRANSPORT=http -e UYUNI_MCP_HOST=0.0.0.0 "
+          port: 8000
+          source: manual-config
+          lastUpdated: '2025-12-11T16:30:00Z'
+        tags:
+        - uyuni
+        - patch-management
+        - linux
+        - system-administration
+        - suse
+      about:
+        icon: https://apps.rancher.io/logos/suse-ai-deployer.png
+        title: SUSE Uyuni
+      source:
+        commit: 9635a2e04eddab77b31918acad8f49e23e5ee551
+        project: https://github.com/uyuni-project/mcp-server-uyuni
+      config:
+        description: Configure Uyuni server connection
+        secrets:
+        - env: UYUNI_SERVER
+          example: http://uyuni.example.com
+          name: uyuni.server
+        - env: UYUNI_USER
+          example: admin
+          name: uyuni.user
+        - env: UYUNI_PASS
+          example: your_password_here
+          name: uyuni.pass
+        - env: UYUNI_MCP_SSL_VERIFY
+          example: 'true'
+          name: uyuni.ssl_verify
+        - env: UYUNI_MCP_WRITE_TOOLS_ENABLED
+          example: 'false'
+          name: uyuni.write_tools_enabled
+    - name: bugzilla
+      image: kskarthik/mcp-bugzilla:latest
+      type: server
+      meta:
+        category: issue-tracking
+        sidecarConfig:
+          command: "docker run -it --rm -e BUGZILLA_SERVER=https://bugzilla.suse.com -e BUGZILLA_HOST=0.0.0.0 -e BUGZILLA_PORT=8000 ghcr.io/openSUSE/mcp-bugzilla:latest"
+          commandType: docker
+          lastUpdated: '2025-12-11T16:30:00Z'
+          port: 8000
+          source: manual-config
+        tags:
+        - bugzilla
+        - issue-tracking
+        - bug-reports
+        - suse
+      about:
+        icon: https://apps.rancher.io/logos/suse-ai-deployer.png
+        title: SUSE Bugzilla
+      source:
+        commit: 040bc4b80f18e4a60deae1aa9f0dcf5c5b0bb0bf
+        project: https://github.com/openSUSE/mcp-bugzilla
+
 # Sidecar Configuration for MCP servers
 sidecar:
   enabled: true
+
+  # Namespace for sidecar deployments
+  namespace: "suse-ai-up-mcp"
+
+  # Base image for sidecar containers (when not using docker commands)
   image:
     registry: python
     repository: "3.11-slim"
