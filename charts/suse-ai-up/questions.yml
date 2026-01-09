@@ -247,13 +247,13 @@ questions:
   show_if: "installType=custom && registry.url"
 
 - variable: logging.level
-   label: "Log Level"
-   description: "Set the logging level for all services"
-   type: enum
-   default: "info"
-   group: "Advanced Options"
-   show_if: "installType=custom"
-   options:
+  label: "Log Level"
+  description: "Set the logging level for all services"
+  type: enum
+  default: "info"
+  group: "Advanced Options"
+  show_if: "installType=custom"
+  options:
    - label: "Error (minimal logging)"
      value: "error"
    - label: "Warning"
