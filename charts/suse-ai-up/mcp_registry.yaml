@@ -183,8 +183,8 @@
     - confluence
     - jira
     sidecarConfig: {
-      commandType: docker,
-      command: "docker run  ghcr.io/sooperset/mcp-atlassian:latest --transport streamable-http --port 8000 {{atlassian.confluence.url}} {{atlassian.jira.url}} {{atlassian.confluence.api_token}} {{atlassian.confluence.personal_token}} {{atlassian.jira.api_token}} {{atlassian.jira.personal_token}} "
+      commandType: python,
+      command: "uv run mcp-atlassian --transport http streamable-http --port 8000 {{atlassian.confluence.url}} {{atlassian.jira.url}} {{atlassian.confluence.api_token}} {{atlassian.confluence.personal_token}} {{atlassian.jira.api_token}} {{atlassian.jira.personal_token}} {{atlassian.confluence.username}} {{atlassian.jira.username}}"
     }
   about:
     description: Tools for Atlassian products (Confluence and Jira). This integration
@@ -203,6 +203,10 @@
       name: atlassian.confluence.url
       templated: true
       type: text
+    - env: CONFLUENCE_USERNAME
+      example: "your.email@company.com"
+      name: atlassian.confluence.username
+      type: text
     - env: CONFLUENCE_API_TOKEN
       example: your_api_token
       name: atlassian.confluence.api_token
@@ -216,6 +220,10 @@
     - env: JIRA_URL
       example: "http://server.demo.com"
       name: atlassian.jira.url
+      type: text
+    - env: JIRA_USERNAME
+      example: "your.email@company.com"
+      name: atlassian.jira.username
       type: text
     - env: JIRA_API_TOKEN
       example: your_api_token
