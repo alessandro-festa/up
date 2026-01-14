@@ -171,3 +171,59 @@
       name: gitea.pat
       templated: true
       type: secret
+- name: atlassian
+  image: ghcr.io/sooperset/mcp-atlassian:latest
+  type: server
+  meta:
+    category: productivity
+    tags:
+    - infrastructure
+    - devops
+    - atlassian
+    - confluence
+    - jira
+    sidecarConfig: {
+      commandType: docker,
+      command: "docker run --rm -i -e {{atlassian.confluence.url}} -e {{atlassian.jira.url}} -e {{atlassian.confluence.api_token}} -e {{atlassian.confluence.personal_token}} -e {{atlassian.jira.api_token}} -e {{atlassian.jira.personal_token}} ghcr.io/sooperset/mcp-atlassian:latest"
+    }
+  about:
+    description: Tools for Atlassian products (Confluence and Jira). This integration
+      supports both Atlassian Cloud and Jira Server/Data Center deployments.
+    icon: https://avatars.githubusercontent.com/u/43281909?s=200&v=4
+    title: Atlassian
+  source:
+    branch: v0.11.9
+    commit: 3b07fd3d05f88cd18c37a1739d4e0a1f37fa9aa5
+    project: https://github.com/sooperset/mcp-atlassian
+  config:
+    description: The MCP server is allowed to access these paths
+    secrets:
+    - env: CONFLUENCE_URL
+      example: "http://server.demo.com"
+      templated: true
+      type: text
+    - env: CONFLUENCE_API_TOKEN
+      example: your_api_token
+      name: atlassian.confluence.url
+      templated: true
+      type: secret
+    - env: CONFLUENCE_PERSONAL_TOKEN
+      example: your_api_token
+      templated: true
+      type: secret
+      name: atlassian.confluence.personal_token
+    - env: JIRA_URL
+      example: "http://server.demo.com"
+      name: atlassian.jira.url
+      type: text
+    - env: JIRA_API_TOKEN
+      example: your_api_token
+      name: atlassian.jira.api_token
+      templated: true
+      type: secret
+    - env: JIRA_PERSONAL_TOKEN
+      example: your_api_token
+      name: atlassian.jira.personal_token
+      templated: true
+      type: secret
+
