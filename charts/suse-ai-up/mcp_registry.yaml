@@ -171,7 +171,7 @@
       name: gitea.pat
       templated: true
       type: secret
-- name: atlassian
+- name: atlassian confluence
   image: ghcr.io/sooperset/mcp-atlassian:latest
   type: server
   meta:
@@ -184,7 +184,7 @@
     - jira
     sidecarConfig: {
       commandType: python,
-      command: "uv run mcp-atlassian --transport streamable-http --port 8000 {{atlassian.confluence.url}} {{atlassian.jira.url}} {{atlassian.confluence.api_token}} {{atlassian.confluence.personal_token}} {{atlassian.jira.api_token}} {{atlassian.jira.personal_token}} {{atlassian.confluence.username}} {{atlassian.jira.username}}"
+      command: "uv run mcp-atlassian --transport streamable-http --port 8000 --confluence-url {{atlassian.confluence.url}} --confluence-username {{atlassian.confluence.username}} --confluence-token {{atlassian.confluence.api_token}}"
     }
   about:
     description: Tools for Atlassian products (Confluence and Jira). This integration
@@ -217,6 +217,33 @@
       templated: true
       type: secret
       name: atlassian.confluence.personal_token
+- name: atlassian jira
+  image: ghcr.io/sooperset/mcp-atlassian:latest
+  type: server
+  meta:
+    category: productivity
+    tags:
+    - infrastructure
+    - devops
+    - atlassian
+    - confluence
+    - jira
+    sidecarConfig: {
+      commandType: python,
+      command: "uv run mcp-atlassian --transport streamable-http --port 8000 --confluence-url {{atlassian.jira.url}} --confluence-username {{atlassian.jira.username}} --confluence-token {{atlassian.jira.api_token}}"
+    }
+  about:
+    description: Tools for Atlassian products (Confluence and Jira). This integration
+      supports both Atlassian Cloud and Jira Server/Data Center deployments.
+    icon: https://avatars.githubusercontent.com/u/43281909?s=200&v=4
+    title: Atlassian
+  source:
+    branch: v0.11.9
+    commit: 3b07fd3d05f88cd18c37a1739d4e0a1f37fa9aa5
+    project: https://github.com/sooperset/mcp-atlassian
+  config:
+    description: The MCP server is allowed to access these paths
+    secrets:
     - env: JIRA_URL
       example: "http://server.demo.com"
       name: atlassian.jira.url
@@ -235,4 +262,3 @@
       name: atlassian.jira.personal_token
       templated: true
       type: secret
-
