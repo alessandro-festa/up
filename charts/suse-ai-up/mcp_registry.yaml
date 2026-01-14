@@ -200,11 +200,12 @@
     secrets:
     - env: CONFLUENCE_URL
       example: "http://server.demo.com"
+      name: atlassian.confluence.url
       templated: true
       type: text
     - env: CONFLUENCE_API_TOKEN
       example: your_api_token
-      name: atlassian.confluence.url
+      name: atlassian.confluence.api_token
       templated: true
       type: secret
     - env: CONFLUENCE_PERSONAL_TOKEN
