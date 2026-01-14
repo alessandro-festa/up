@@ -171,7 +171,7 @@
       name: gitea.pat
       templated: true
       type: secret
-- name: atlassian confluence
+- name: confluence
   image: ghcr.io/sooperset/mcp-atlassian:latest
   type: server
   meta:
@@ -184,13 +184,13 @@
     - jira
     sidecarConfig: {
       commandType: python,
-      command: "uv run mcp-atlassian --transport streamable-http --port 8000 --confluence-url {{atlassian.confluence.url}} --confluence-username {{atlassian.confluence.username}} --confluence-token {{atlassian.confluence.api_token}}"
+      command: "uv run mcp-atlassian --transport streamable-http --port 8000 --confluence-url {{atlassian.confluence.url}} --confluence-username {{atlassian.confluence.username}} --confluence-token {{atlassian.confluence.api_token}} --confluence-personal-token {{atlassian.confluence.personal_token}}"
     }
   about:
     description: Tools for Atlassian products (Confluence and Jira). This integration
       supports both Atlassian Cloud and Jira Server/Data Center deployments.
     icon: https://avatars.githubusercontent.com/u/43281909?s=200&v=4
-    title: Atlassian
+    title: "Atlassian Confluence"
   source:
     branch: v0.11.9
     commit: 3b07fd3d05f88cd18c37a1739d4e0a1f37fa9aa5
@@ -217,7 +217,7 @@
       templated: true
       type: secret
       name: atlassian.confluence.personal_token
-- name: atlassian jira
+- name: jira
   image: ghcr.io/sooperset/mcp-atlassian:latest
   type: server
   meta:
@@ -230,13 +230,13 @@
     - jira
     sidecarConfig: {
       commandType: python,
-      command: "uv run mcp-atlassian --transport streamable-http --port 8000 --confluence-url {{atlassian.jira.url}} --confluence-username {{atlassian.jira.username}} --confluence-token {{atlassian.jira.api_token}}"
+      command: "uv run mcp-atlassian --transport streamable-http --port 8000 --jira-url {{atlassian.jira.url}} --jira-username {{atlassian.jira.username}} --jira-token {{atlassian.jira.api_token}} --jira-personal-token {{atlassian.jira.personal_token}}"
     }
   about:
     description: Tools for Atlassian products (Confluence and Jira). This integration
       supports both Atlassian Cloud and Jira Server/Data Center deployments.
     icon: https://avatars.githubusercontent.com/u/43281909?s=200&v=4
-    title: Atlassian
+    title: "Atlassian Jira"
   source:
     branch: v0.11.9
     commit: 3b07fd3d05f88cd18c37a1739d4e0a1f37fa9aa5
