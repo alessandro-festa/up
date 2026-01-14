@@ -148,7 +148,7 @@
     - devops
     sidecarConfig:
       commandType: docker
-      command: docker run  {{gitea.host}} {{gitea.pat}} docker.gitea.com/gitea-mcp-server -t streamable-http 
+      command: docker run  -e {{gitea.host}} -e {{gitea.pat}} docker.gitea.com/gitea-mcp-server -t streamable-http 
       source: manual-config
       lastUpdated: '2025-12-18T15:14:30.169082Z'
   about:
