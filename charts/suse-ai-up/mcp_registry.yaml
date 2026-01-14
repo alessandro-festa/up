@@ -184,7 +184,7 @@
     - jira
     sidecarConfig: {
       commandType: docker,
-      command: "docker run --rm -i -e {{atlassian.confluence.url}} -e {{atlassian.jira.url}} -e {{atlassian.confluence.api_token}} -e {{atlassian.confluence.personal_token}} -e {{atlassian.jira.api_token}} -e {{atlassian.jira.personal_token}} ghcr.io/sooperset/mcp-atlassian:latest"
+      command: "docker run  -{{atlassian.confluence.url}} {{atlassian.jira.url}} {{atlassian.confluence.api_token}} {{atlassian.confluence.personal_token}} {{atlassian.jira.api_token}} {{atlassian.jira.personal_token}} ghcr.io/sooperset/mcp-atlassian:latest"
     }
   about:
     description: Tools for Atlassian products (Confluence and Jira). This integration
