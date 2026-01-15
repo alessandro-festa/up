@@ -1,0 +1,89 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "suse-ai-up.fullname" . }}-init-users
+  labels:
+    {{- include "suse-ai-up.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "1"
+spec:
+  template:
+    metadata:
+      labels:
+        {{- include "suse-ai-up.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: init-users
+          image: {{ include "suse-ai-up.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              # Wait for the main service to be ready
+              until curl -f http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/health; do
+                echo "Waiting for service to be ready..."
+                sleep 5
+              done
+
+              # Create initial users and groups
+              {{- range .Values.initialUsers.users }}
+              echo "Creating user: {{ .id }}"
+              curl -X POST http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/api/v1/users \
+                -H "Content-Type: application/json" \
+                -H "X-User-ID: admin" \
+                -d '{
+                  "id": "{{ .id }}",
+                  "name": "{{ .name }}",
+                  "email": "{{ .email }}",
+                  "groups": {{ .groups | toJson }},
+                  "auth_provider": "{{ .authProvider }}"
+                }'
+              {{- if .password }}
+              # Set password for local users
+              echo "Setting password for user: {{ .id }}"
+              curl -X PUT http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/auth/password \
+                -H "Content-Type: application/json" \
+                -H "X-User-ID: {{ .id }}" \
+                -d '{
+                  "new_password": "{{ .password }}"
+                }'
+              {{- end }}
+              {{- end }}
+
+              # Create initial groups
+              {{- range .Values.initialGroups.groups }}
+              echo "Creating group: {{ .id }}"
+              curl -X POST http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/api/v1/groups \
+                -H "Content-Type: application/json" \
+                -H "X-User-ID: admin" \
+                -d '{
+                  "id": "{{ .id }}",
+                  "name": "{{ .name }}",
+                  "description": "{{ .description }}",
+                  "permissions": {{ .permissions | toJson }}
+                }'
+              {{- end }}
+
+              echo "Initial user and group setup completed"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
