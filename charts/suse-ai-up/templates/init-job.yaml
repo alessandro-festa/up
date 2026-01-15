@@ -1,3 +1,4 @@
+{{- if .Values.initialUsers.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -23,7 +24,7 @@ spec:
             - -c
             - |
               # Wait for the main service to be ready
-              until curl -f http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/health; do
+              until curl -f http://test-release-suse-ai-up:8911/health; do
                 echo "Waiting for service to be ready..."
                 sleep 5
               done
@@ -31,20 +32,20 @@ spec:
               # Create initial users and groups
               {{- range .Values.initialUsers.users }}
               echo "Creating user: {{ .id }}"
-              curl -X POST http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/api/v1/users \
+              curl -X POST http://test-release-suse-ai-up:8911/api/v1/users \
                 -H "Content-Type: application/json" \
                 -H "X-User-ID: admin" \
                 -d '{
                   "id": "{{ .id }}",
                   "name": "{{ .name }}",
                   "email": "{{ .email }}",
-                  "groups": {{ .groups | toJson }},
+                  "groups": {{ if kindIs "string" .groups }}{{ splitList "," .groups | toJson }}{{ else }}{{ .groups | toJson }}{{ end }},
                   "auth_provider": "{{ .authProvider }}"
                 }'
               {{- if .password }}
               # Set password for local users
               echo "Setting password for user: {{ .id }}"
-              curl -X PUT http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/auth/password \
+              curl -X PUT http://test-release-suse-ai-up:8911/auth/password \
                 -H "Content-Type: application/json" \
                 -H "X-User-ID: {{ .id }}" \
                 -d '{
@@ -56,14 +57,14 @@ spec:
               # Create initial groups
               {{- range .Values.initialGroups.groups }}
               echo "Creating group: {{ .id }}"
-              curl -X POST http://{{ include "suse-ai-up.fullname" . }}:{{ .Values.services.proxy.port }}/api/v1/groups \
+              curl -X POST http://test-release-suse-ai-up:8911/api/v1/groups \
                 -H "Content-Type: application/json" \
                 -H "X-User-ID: admin" \
                 -d '{
                   "id": "{{ .id }}",
                   "name": "{{ .name }}",
                   "description": "{{ .description }}",
-                  "permissions": {{ .permissions | toJson }}
+                  "permissions": {{ if kindIs "string" .permissions }}{{ splitList "," .permissions | toJson }}{{ else }}{{ .permissions | toJson }}{{ end }}
                 }'
               {{- end }}
 
@@ -87,3 +88,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}
