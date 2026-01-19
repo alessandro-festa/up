@@ -297,14 +297,14 @@
     - demo
     sidecarConfig:
       commandType: python
-      command: fastmcp run simplemcp.py --transport=http --port=8000 --host 0.0.0.0
+      command: uv run simplemcp.py
     port: 8000
     source: https://github.com/alessandro-festa/simplemcp
     lastUpdated: 
   about:
     icon: https://raw.githubusercontent.com/rancher/icons/refs/heads/master/svg/apps.svg
     title: "My Simple MCP"
-    description: <description-text>
+    description: "A simple MCP server to demonstrate the usage of the MCP Registry"
   source:
     commit: 
     project: https://github.com/alessandro-festa/simplemcp  # Required for python and go types
