@@ -298,7 +298,7 @@
     - monitoring
     sidecarConfig:
       commandType: npx
-      command: npx -y @dynatrace-oss/dynatrace-mcp-server@latest --server -p 8000
+      command: npx -y @dynatrace-oss/dynatrace-mcp-server@latest --server -p 8000 {{dynatrace.dt_env}}
     port: 8000
     source: https://github.com/elastic/mcp-server-elasticsearch
     lastUpdated: 
@@ -310,4 +310,12 @@
     commit: 
     project: https://github.com/elastic/mcp-server-elasticsearch  # Required for python and go types
     release:      # Optional for go type (enables pre-built binary downloads)
+  config:
+    description: Insert your DT Environment URL to use this MCP
+    secrets:
+    - env: DT_ENVIRONMENT
+      example: "https://abc12345.apps.dynatrace.com"
+      name: dynatrace.dt_env
+      templated: true
+      type: text
 
