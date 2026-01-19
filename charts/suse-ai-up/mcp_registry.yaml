@@ -287,26 +287,27 @@
       name: github.personal_access_token
       templated: true
       type: text
-- name: simlplemcp
+- name: dynatrace
   image: none  # Required for docker type, optional for others
   type: server
   meta:
-    category: demo
+    category: infrastructure
     tags:
     - mcp
-    - demo
+    - infrastructure
+    - monitoring
     sidecarConfig:
-      commandType: python
-      command: uv run server.py
+      commandType: npx
+      command: npx -y @dynatrace-oss/dynatrace-mcp-server@latest --server -p 8000
     port: 8000
-    source: https://github.com/alessandro-festa/simplemcp
+    source: https://github.com/elastic/mcp-server-elasticsearch
     lastUpdated: 
   about:
-    icon: https://raw.githubusercontent.com/rancher/icons/refs/heads/master/svg/apps.svg
-    title: "My Simple MCP"
-    description: "A simple MCP server to demonstrate the usage of the MCP Registry"
+    icon: https://avatars.githubusercontent.com/u/58178984
+    title: "Dynatrace"
+    description: "The Dynatrace MCP server allows AI Assistants to interact with the Dynatrace observability platform, bringing real-time observability data directly into your development workflow."
   source:
     commit: 
-    project: https://github.com/alessandro-festa/simplemcp  # Required for python and go types
+    project: https://github.com/elastic/mcp-server-elasticsearch  # Required for python and go types
     release:      # Optional for go type (enables pre-built binary downloads)
 
