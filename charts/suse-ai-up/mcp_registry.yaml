@@ -297,7 +297,7 @@
     - demo
     sidecarConfig:
       commandType: python
-      command: uv run simplemcp.py
+      command: uv run server.py
     port: 8000
     source: https://github.com/alessandro-festa/simplemcp
     lastUpdated: 
