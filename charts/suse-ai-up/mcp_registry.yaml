@@ -318,4 +318,33 @@
       name: dynatrace.dt_env
       templated: true
       type: text
-
+- name: gitlab
+  image: none  # Required for docker type, optional for others
+  type: remote
+  meta:
+    category: infrastructure
+    tags:
+    - developers
+    - infrastructure
+    - devops
+    sidecarConfig:
+      commandType: http
+      command: https://{{gitlab.host}}/api/v4/mcp
+    port: 8000
+    source: https://gitlab.com/gitlab-org/gitlab
+    lastUpdated: 
+  about:
+    icon: https://avatars.githubusercontent.com/u/1086321
+    title: "Gitlab"
+    description: "With the GitLab Model Context Protocol (MCP) server, you can securely connect AI tools and applications to your GitLab instance. AI assistants like Claude Desktop, Claude Code, Cursor, and other MCP-compatible tools can then access your GitLab data and perform actions on your behalf."
+    commit: 
+    project: https://gitlab.com/gitlab-org/gitlab  # Required for python and go types
+    release:      # Optional for go type (enables pre-built binary downloads)
+  config:
+    description: Insert your DT Environment URL to use this MCP
+    secrets:
+    - env: GITLAB_URL
+      example: "https://gitlab.com"
+      name: gitlab.host
+      templated: true
+      type: text
