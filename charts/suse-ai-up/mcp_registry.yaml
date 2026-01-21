@@ -377,11 +377,6 @@
       name: qdrant.url
       templated: true
       type: text
-    - env: QDRANT_URL
-      example: "https://youserver.domain.com"
-      name: qdrant.url
-      templated: true
-      type: text
     - env: QDRANT_API_KEY
       example: "1234..."
       name: qdrant.apikey
