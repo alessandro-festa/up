@@ -363,9 +363,9 @@
     source: https://github.com/qdrant/mcp-server-qdrant
     lastUpdated: 
   about:
-    icon: https://avatars.githubusercontent.com/u/1086321
-    title: "Gitlab"
-    description: "With the GitLab Model Context Protocol (MCP) server, you can securely connect AI tools and applications to your GitLab instance. AI assistants like Claude Desktop, Claude Code, Cursor, and other MCP-compatible tools can then access your GitLab data and perform actions on your behalf."
+    icon: https://avatars.githubusercontent.com/u/73504361
+    title: "Qdrant"
+    description: "An official Model Context Protocol server for keeping and retrieving memories in the Qdrant vector search engine. It acts as a semantic memory layer on top of the Qdrant database."
     commit: 
     project: https://github.com/qdrant/mcp-server-qdrant  # Required for python and go types
     release:      # Optional for go type (enables pre-built binary downloads)
