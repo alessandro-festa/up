@@ -358,7 +358,7 @@
     - database
     sidecarConfig:
       commandType: python
-      command: uv run mcp-server-qdrant --transport streamable-http --port 8000 {{qdrant.url}} {{qdrant.apikey}} {{qdrant.collection}} {{qdrant.embedprovider}} {{qdrant.embedmodel}}
+      command: uvx mcp-server-qdrant --transport streamable-http --port 8000 {{qdrant.url}} {{qdrant.apikey}} {{qdrant.collection}} {{qdrant.embedprovider}} {{qdrant.embedmodel}}
     port: 8000
     source: https://github.com/qdrant/mcp-server-qdrant
     lastUpdated: 
