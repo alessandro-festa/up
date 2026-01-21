@@ -348,3 +348,57 @@
       name: gitlab.host
       templated: true
       type: text
+- name: qdrant
+  image: none  # Required for docker type, optional for others
+  type: server
+  meta:
+    category: infrastructure
+    tags:
+    - infrastructure
+    - database
+    sidecarConfig:
+      commandType: python
+      command: uv run mcp-server-qdrant --transport streamable-http --port 8000 {{qdrant.url}} {{qdrant.apikey}} {{qdrant.collection}} {{qdrant.embedprovider}} {{qdrant.embedmodel}}
+    port: 8000
+    source: https://github.com/qdrant/mcp-server-qdrant
+    lastUpdated: 
+  about:
+    icon: https://avatars.githubusercontent.com/u/1086321
+    title: "Gitlab"
+    description: "With the GitLab Model Context Protocol (MCP) server, you can securely connect AI tools and applications to your GitLab instance. AI assistants like Claude Desktop, Claude Code, Cursor, and other MCP-compatible tools can then access your GitLab data and perform actions on your behalf."
+    commit: 
+    project: https://github.com/qdrant/mcp-server-qdrant  # Required for python and go types
+    release:      # Optional for go type (enables pre-built binary downloads)
+  config:
+    description: Insert your DT Environment URL to use this MCP
+    secrets:
+    - env: QDRANT_URL
+      example: "https://youserver.domain.com"
+      name: qdrant.url
+      templated: true
+      type: text
+    - env: QDRANT_URL
+      example: "https://youserver.domain.com"
+      name: qdrant.url
+      templated: true
+      type: text
+    - env: QDRANT_API_KEY
+      example: "1234..."
+      name: qdrant.apikey
+      templated: true
+      type: text
+    - env: COLLECTION_NAME
+      example: "my collection"
+      name: qdrant.collection
+      templated: true
+      type: text
+    - env: EMBEDDING_PROVIDER
+      example: "fastembed"
+      name: qdrant.embedprovider
+      templated: false
+      type: text
+    - env: EMBEDDING_MODEL
+      example: "sentence-transformers/all-MiniLM-L6-v2"
+      name: qdrant.embedmodel
+      templated: true
+      type: text
