@@ -22,6 +22,7 @@
   source:
     commit: 9635a2e04eddab77b31918acad8f49e23e5ee551
     project: https://github.com/uyuni-project/mcp-server-uyuni
+    tag: v0.5.0
   config:
     description: Configure Uyuni server connection
     secrets:
@@ -92,6 +93,7 @@
   source:
     commit: 040bc4b80f18e4a60deae1aa9f0dcf5c5b0bb0bf
     project: https://github.com/openSUSE/mcp-bugzilla
+    tag: v0.8.0
   config:
     description: Configure Bugzilla server connection
     secrets:
@@ -128,6 +130,7 @@
   source:
     commit: none
     project: https://github.com/trento-project/mcp-server  # Required for python type
+    tag: v1.0.0
   config:
     description: Configure Treno server connection
     secrets:
@@ -170,6 +173,7 @@
     commit: 23fa0dd1a821d1346c1de2abafe7327d26981606
     project: https://gitea.com/gitea/gitea-mcp
     release: https://gitea.com/gitea/gitea-mcp/releases/tag/v0.7.0
+    tag: v0.7.0
   config:
     description: ""
     secrets:
@@ -209,6 +213,7 @@
     branch: v0.11.9
     commit: 3b07fd3d05f88cd18c37a1739d4e0a1f37fa9aa5
     project: https://github.com/sooperset/mcp-atlassian
+    tag: v0.13.0
   config:
     description: The MCP server is allowed to access these paths
     secrets:
@@ -259,6 +264,7 @@
     branch: v0.11.9
     commit: 3b07fd3d05f88cd18c37a1739d4e0a1f37fa9aa5
     project: https://github.com/sooperset/mcp-atlassian
+    tag: v0.13.0
   config:
     description: The MCP server is allowed to access these paths
     secrets:
@@ -306,6 +312,7 @@
   source:
     commit: 23fa0dd1a821d1346c1de2abafe7327d26981606
     project: https://github.com/github/github-mcp-server
+    tag: v0.30.2
   config:
     description: You can create a GitHub personal access token [on GitHub](https://github.com/settings/personal-access-tokens/new)
     secrets:
@@ -329,6 +336,7 @@
       command: npx -y @dynatrace-oss/dynatrace-mcp-server@latest --server -p 8000 {{dynatrace.dt_env}}
     port: 8000
     source: https://github.com/elastic/mcp-server-elasticsearch
+    tag: v0.4.6
     lastUpdated: 
   about:
     icon: https://avatars.githubusercontent.com/u/58178984
@@ -361,6 +369,7 @@
       command: https://{{gitlab.host}}/api/v4/mcp
     port: 8000
     source: https://gitlab.com/gitlab-org/gitlab
+    tag: v0.0.0
     lastUpdated: 
   about:
     icon: https://avatars.githubusercontent.com/u/1086321
@@ -399,6 +408,7 @@
     commit: 
     project: https://github.com/qdrant/mcp-server-qdrant  # Required for python and go types
     release:      # Optional for go type (enables pre-built binary downloads)
+    tag: v0.8.1
   config:
     description: Insert your DT Environment URL to use this MCP
     secrets:
