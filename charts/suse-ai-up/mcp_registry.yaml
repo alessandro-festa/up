@@ -443,7 +443,7 @@
       type: text
       mandatory: false  
 - name: elasticsearch
-  image: ghcr.io/uyuni-project/mcp-server-uyuni:latest
+  image: docker.elastic.co/mcp/elasticsearch
   type: server
   meta:
     category: system-management
@@ -457,13 +457,13 @@
     - system-administration
     - infrastructure
   about:
-    icon: https://apps.rancher.io/logos/suse-ai-deployer.png
-    title: SUSE Uyuni
-    description: "The Uyuni MCP Server is a Model Context Protocol (MCP) server implementation that bridges the gap between Large Language Models (LLMs) and the Uyuni configuration and infrastructure management solution."
+    icon: https://avatars.githubusercontent.com/u/6764390
+    title: ElasticSearch
+    description: "Connect to your Elasticsearch data directly from any MCP Client using the Model Context Protocol (MCP).This server connects agents to your Elasticsearch data using the Model Context Protocol. It allows you to interact with your Elasticsearch indices through natural language conversations."
   source:
-    commit: 9635a2e04eddab77b31918acad8f49e23e5ee551
-    project: https://github.com/uyuni-project/mcp-server-uyuni
-    tag: v0.5.0
+    commit: e1141c13e7103c100c4555ad32e1f7e3d2c5ad40
+    project: https://github.com/elastic/mcp-server-elasticsearch
+    tag: v0.4.6
   config:
     description: Configure Uyuni server connection
     secrets:
