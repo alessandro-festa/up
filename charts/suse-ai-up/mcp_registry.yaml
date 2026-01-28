@@ -442,26 +442,58 @@
       templated: true
       type: text
       mandatory: false  
-- name: simlplemcp
-  image: none  # Required for docker type, optional for others
+- name: elasticsearch
+  image: ghcr.io/uyuni-project/mcp-server-uyuni:latest
   type: server
   meta:
-    category: demo
-    tags:
-    - mcp
-    - demo
+    category: system-management
     sidecarConfig:
-      commandType: python
-      command: uv run server.py
-    port: 8000
-    source: https://github.com/alessandro-festa/simplemcp
-    lastUpdated: 
+      commandType: docker
+      command: docker run {{elasticsearch.es_url}} {{elasticsearch.es_api_key}} {{elasticsearch.es_username}} {{elasticsearch.es_password}} {{elasticsearch.es_ssl_skip_verify}} docker.elastic.co/mcp/elasticsearch http
+      port: 8000
+      source: manual-config
+      lastUpdated: '2025-12-11T16:30:00Z'
+    tags:
+    - system-administration
+    - infrastructure
   about:
-    icon: https://raw.githubusercontent.com/rancher/icons/refs/heads/master/svg/apps.svg
-    title: "My Simple MCP"
-    description: "A simple MCP server to demonstrate the usage of the MCP Registry"
+    icon: https://apps.rancher.io/logos/suse-ai-deployer.png
+    title: SUSE Uyuni
+    description: "The Uyuni MCP Server is a Model Context Protocol (MCP) server implementation that bridges the gap between Large Language Models (LLMs) and the Uyuni configuration and infrastructure management solution."
   source:
-    commit: 
-    project: https://github.com/alessandro-festa/simplemcp  # Required for python and go types
-    release:      # Optional for go type (enables pre-built binary downloads)
-    tag: v0.0.1
+    commit: 9635a2e04eddab77b31918acad8f49e23e5ee551
+    project: https://github.com/uyuni-project/mcp-server-uyuni
+    tag: v0.5.0
+  config:
+    description: Configure Uyuni server connection
+    secrets:
+    - env: ES_URL
+      example: https://elastic.example.com
+      name: elasticsearch.es_url
+      templated: true
+      type: text
+      mandatory: true
+    - env: ES_API_KEY
+      example: "el1234..."
+      name: elasticsearch.es_api_key
+      templated: true
+      type: secret
+      mandatory: false
+    - env: ES_USERNAME
+      example: "admin"
+      name: elasticsearch.es_username
+      templated: true
+      type: text
+      mandatory: false
+    - env: ES_PASSWORD
+      example: "admin1234..."
+      name: elasticsearch.es_password
+      templated: true
+      type: secret
+      mandatory: false
+    - env: ES_SSL_SKIP_VERIFY
+      example: true
+      name: elasticsearch.es_ssl_skip_verify
+      templated: true
+      type: bool
+      mandatory: false
