@@ -384,7 +384,13 @@
     - env: GITLAB_URL
       example: "https://gitlab.com"
       name: gitlab.host
-      templated: true
+      templated: false
+      type: text
+      mandatory: true
+    - env: GITLAB_TOKEN
+      example: "git_1234..."
+      name: gitlab.token
+      templated: false
       type: text
       mandatory: true  
 - name: qdrant
@@ -448,8 +454,8 @@
   meta:
     category: system-management
     sidecarConfig:
-      commandType: docker
-      command: docker run  docker.elastic.co/mcp/elasticsearch http {{elasticsearch.es_url}} {{elasticsearch.es_api_key}} {{elasticsearch.es_username}} {{elasticsearch.es_password}} {{elasticsearch.es_ssl_skip_verify}} 
+      commandType: http
+      command: {{elasticsearch.es_url}}
       port: 8000
       source: manual-config
       lastUpdated: '2025-12-11T16:30:00Z'
@@ -467,33 +473,10 @@
   config:
     description: Configure Uyuni server connection
     secrets:
-    - env: ES_URL
-      example: https://elastic.example.com
+    - env: KIBANA_URL
+      example: https://{host}/api/agent_builder/mcp
       name: elasticsearch.es_url
       templated: true
       type: text
       mandatory: true
-    - env: ES_API_KEY
-      example: "el1234..."
-      name: elasticsearch.es_api_key
-      templated: true
-      type: secret
-      mandatory: false
-    - env: ES_USERNAME
-      example: "admin"
-      name: elasticsearch.es_username
-      templated: true
-      type: text
-      mandatory: false
-    - env: ES_PASSWORD
-      example: "admin1234..."
-      name: elasticsearch.es_password
-      templated: true
-      type: secret
-      mandatory: false
-    - env: ES_SSL_SKIP_VERIFY
-      example: true
-      name: elasticsearch.es_ssl_skip_verify
-      templated: true
-      type: bool
-      mandatory: false
+
