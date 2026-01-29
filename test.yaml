@@ -457,49 +457,49 @@ registry:
           type: text
           templated: true
           mandatory: false
-    - name: trento
-      image: registry.opensuse.org/devel/sap/trento/factory/containers/trento/mcp-server-trento:latest  # Required for docker type, optional for others
-      type: server
-      meta:
-        category: infrastructure
-        tags:
-          - sap
-          - suse
-        sidecarConfig:
-          commandType: docker
-          command: docker run  registry.opensuse.org/devel/sap/trento/factory/containers/trento/mcp-server-trento:latest {{trento-mcp-server.port}} {{trento-mcp-server.serverurl}} {{trento-mcp-server.mcp_tag_filter}}  
-          port: 8000
-          source: manual-config
-          lastUpdated: ''
-      about:
-        icon: https://avatars.githubusercontent.com/u/80825642
-        title: SUSE Trento
-        description: "The Trento MCP Server is a Model Context Protocol (MCP) implementation that bridges the gap between AI assistants and the Trento Project. Instead of navigating through web interfaces, you can now manage and monitor your SAP systems by simply conversing with your AI assistant in natural language."
-      source:
-        commit: none
-        project: https://github.com/trento-project/mcp-server  # Required for python type
-        tag: v1.0.0
-      config:
-        description: Configure Treno server connection
-        secrets:
-          - env: TRENTO_MCP_TRENTO_URL
-            example: https://demo.trento-project.io/
-            name: trento-mcp-server.serverurl
-            type: text
-            templated: true
-            mandatory: true  
-          - env: TRENTO_MCP_TAG_FILTER
-            example: MCP
-            name: trento-mcp-server.mcp_tag_filter
-            type: text
-            templated: true
-            mandatory: false  
-          - env: TRENTO_MCP_PORT
-            example: "8000"
-            name: trento-mcp-server.port
-            type: text
-            templated: true
-            mandatory: false  
+      - name: trento
+        image: registry.opensuse.org/devel/sap/trento/factory/containers/trento/mcp-server-trento:latest  # Required for docker type, optional for others
+        type: server
+        meta:
+          category: infrastructure
+          tags:
+            - sap
+            - suse
+          sidecarConfig:
+            commandType: docker
+            command: docker run  registry.opensuse.org/devel/sap/trento/factory/containers/trento/mcp-server-trento:latest {{trento-mcp-server.port}} {{trento-mcp-server.serverurl}} {{trento-mcp-server.mcp_tag_filter}}  
+            port: 8000
+            source: manual-config
+            lastUpdated: ''
+        about:
+          icon: https://avatars.githubusercontent.com/u/80825642
+          title: SUSE Trento
+          description: "The Trento MCP Server is a Model Context Protocol (MCP) implementation that bridges the gap between AI assistants and the Trento Project. Instead of navigating through web interfaces, you can now manage and monitor your SAP systems by simply conversing with your AI assistant in natural language."
+        source:
+          commit: none
+          project: https://github.com/trento-project/mcp-server  # Required for python type
+          tag: v1.0.0
+        config:
+          description: Configure Treno server connection
+          secrets:
+            - env: TRENTO_MCP_TRENTO_URL
+              example: https://demo.trento-project.io/
+              name: trento-mcp-server.serverurl
+              type: text
+              templated: true
+              mandatory: true  
+            - env: TRENTO_MCP_TAG_FILTER
+              example: MCP
+              name: trento-mcp-server.mcp_tag_filter
+              type: text
+              templated: true
+              mandatory: false  
+            - env: TRENTO_MCP_PORT
+              example: "8000"
+              name: trento-mcp-server.port
+              type: text
+              templated: true
+              mandatory: false  
     - name: gitea
       image: none
       type: server
