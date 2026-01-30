@@ -474,7 +474,7 @@
     description: Configure Uyuni server connection
     secrets:
     - env: KIBANA_URL
-      example: https://{host}/api/agent_builder/mcp
+      example: https://<you host>/api/agent_builder/mcp
       name: elasticsearch.es_url
       templated: true
       type: text
