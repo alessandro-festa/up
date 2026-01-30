@@ -448,35 +448,5 @@
       templated: true
       type: text
       mandatory: false  
-- name: elasticsearch
-  image: docker.elastic.co/mcp/elasticsearch
-  type: server
-  meta:
-    category: system-management
-    sidecarConfig:
-      commandType: http
-      command: {{elasticsearch.es_url}}
-      port: 8000
-      source: manual-config
-      lastUpdated: '2025-12-11T16:30:00Z'
-    tags:
-    - system-administration
-    - infrastructure
-  about:
-    icon: https://avatars.githubusercontent.com/u/6764390
-    title: ElasticSearch
-    description: "Connect to your Elasticsearch data directly from any MCP Client using the Model Context Protocol (MCP).This server connects agents to your Elasticsearch data using the Model Context Protocol. It allows you to interact with your Elasticsearch indices through natural language conversations."
-  source:
-    commit: e1141c13e7103c100c4555ad32e1f7e3d2c5ad40
-    project: https://github.com/elastic/mcp-server-elasticsearch
-    tag: v0.4.6
-  config:
-    description: Configure Uyuni server connection
-    secrets:
-    - env: KIBANA_URL
-      example: https://<you host>/api/agent_builder/mcp
-      name: elasticsearch.es_url
-      templated: true
-      type: text
-      mandatory: true
+
 
