@@ -77,7 +77,11 @@
     category: issue-tracking
     sidecarConfig:
       commandType: python
-      command: export BUGZILLA_SERVER={{bugzilla.server}} export MCP_API_KEY_HEADER={{bugzilla.apikey}} uv run mcp-bugzilla --host 0.0.0.0 --port 8000
+      command: |
+        export BUGZILLA_SERVER={{bugzilla.server}} && export MCP_HOST=0.0.0.0 && 
+        export MCP_PORT=8000 && export MCP_API_KEY_HEADER={{bugzilla.apikey}} &&
+        export LOG_LEVEL=INFO && 
+        uv run mcp-bugzilla
       port: 8000
       source: manual-config
       lastUpdated: '2025-12-11T16:30:00Z'
