@@ -457,7 +457,7 @@
       templated: true
       type: text
       mandatory: false
-- name: simlplemcp
+- name: simlplemcp2
   image: none  # Required for docker type, optional for others
   type: server
   meta:
